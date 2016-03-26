@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,bbm,accents,mathtools,amsthm,gensymb,mathrsfs}
+\let\ohm\relax
+\let\celsius\relax
+\let\square\relax
+\let\degree\relax
+\usepackage{SIunits, units}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{Computability and Logic}
+\setlength{\headheight}{15.2pt}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\comment}[1]{}
+\newcommand{\piecewise}[1]{\left\{\begin{array}{ll} #1 \end{array}\right.}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}
+\setcounter{MaxMatrixCols}{20}
+
+\theoremstyle{definition}
+\newtheorem*{lemma*}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{theorem*}{Theorem}
+
+\begin{document}
+
+\title{First Order Logic is Undecidable}
+\author{Lee Danilek, Priyanka Krishnamurthi, Andrew Malta, ...}
+\maketitle
+
+\begin{enumerate}
+\item[(1)] 
+The decision problem for a property is solvable if there is a mechanical test which, applied to \textit{any} object of the appropriate sort, eventually (after a finite number of steps) classifies that object correctly as a positive or negative instance of that property.
+
+In first order logic the decision problem deals with validity and satisfiability of sentences.
+
+We will prove that there does not exist a mechanical negative test for deciding if a sentence in first order logic is valid.
+
+In this presentation, we will demonstrate that if there existed such a routine, it would imply that we could mechanically determine whether a Turing machine will eventually halt. Since we know this is not possible, there can be no mechanical routine to determine validity.
+
+\begin{itemize}
+
+\item $\Delta$ is a finite set of sentences that describe the operation of the Turing machine.
+
+\item $n$ is a number, the input to the Turing machine.
+
+\item $H$ is a sentence such that $\Delta\vdash H\iff$ the machine does eventually halt when given input $n$, when $H$ is interpreted in $\mathscr{I}$.
+
+\item $\mathscr{I}$ is an interpretation for $H$ and the sentences in $\Delta$. The variables range over the integers, and it uses the following definitions:
+
+\item $Q_i$ for $0 \le i \le r$ is a binary predicate function.\\
+$t Q_i x \iff $ at time $t$ the machine is in state $q_i$, scanning square number $x$.
+
+\item $S_j$ for $0\le j\le r$ is a binary predicate function.\\
+$t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning square number $x$.
+
+\item $<$ is the standard less-than binary predicate.
+
+\item $0$ is the standard zero function.
+
+\item $'$ is the standard successor function.
+
+\end{itemize}
+
+Thus, if we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because $\Delta\vdash H$ if and only if a certain sentence is valid, namely the condition whose antecedent is the conjunction of all sentences in $\Delta$ and whose consequent is $H$: $\Delta_1 \wedge \Delta_2 \wedge \cdots \rightarrow H$.
+
+The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. 
+
+If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
+
+Rule: $q_i \rightarrow S_j:S_k \rightarrow q_m$.
+
+\[\forall t\forall x\forall y \{[tQ_ix\& tS_jx] \rightarrow [t'Q_mx\& t'S_kx \& (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry))]\}\]
+
+Rule: $q_i\rightarrow S_j:R\rightarrow q_m$.
+
+\[\forall t\forall x\forall y\{[tQ_tx\&tS_jx]\rightarrow [t'Q_mx' \& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
+
+Rule: $q_i\rightarrow S_j:L \rightarrow q_m$
+
+\[\forall t \forall x \forall y \{[tQ_ix' \& tS_jx']\rightarrow [t'Q_mx\& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
+
+Starting condition:
+
+\newcommand{\z}{\mathbf{o}}
+
+\[\z Q_1 \z\ \&\ \z S_1\z'\ \&\ \z S_0\z '\ \&\dots\&\ \z S_1\z^{(n-1)}\ \&\ \forall y [(y\ne \z\ \&\ y\ne \z'\ \&\dots\&\ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
+
+One sentence says that each integer is the 
+
+\end{enumerate}
+
+\end{document}
