@@ -20,15 +20,17 @@ The squares of the tape are numbered by integers, and moments of time are intege
 
 If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
 
-Rule: $q_i \rightarrow S_j:S_k \rightarrow q_m$.
+\newcommand{\igEdge}[3]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#1}};}\ensuremath{\xrightarrow[]{#2}}\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#3}};}}
+
+Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
 
 \[\forall t\forall x\forall y \{[tQ_ix\& tS_jx] \rightarrow [t'Q_mx\& t'S_kx \& (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry))]\}\]
 
-Rule: $q_i\rightarrow S_j:R\rightarrow q_m$.
+Rule: \igEdge{q_i}{S_j:R}{q_m}
 
 \[\forall t\forall x\forall y\{[tQ_tx\&tS_jx]\rightarrow [t'Q_mx' \& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
 
-Rule: $q_i\rightarrow S_j:L \rightarrow q_m$
+Rule: \igEdge{q_i}{S_j:L}{q_m}
 
 \[\forall t \forall x \forall y \{[tQ_ix' \& tS_jx']\rightarrow [t'Q_mx\& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
 
