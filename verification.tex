@@ -1,20 +1,19 @@
-\subsection{$\delta \vdash H \implies$ machine halts on n}
+\subsection{$\Delta \vdash H \implies$ machine halts on n}
 
 We know that $\delta$ is true under our interpretation.  Therefore, $H$ must also be true under this interpretation.
-Since $H$ is true if and only if the machine halts on $n$, $\delta \vdash H \implies$ machine halts on n.
+Since $H$ is true if and only if the machine halts on $n$, $\Delta \vdash H \implies$ machine halts on n.
 
-\subsection{machine halts on n $\implies \delta \vdash H$}
+\subsection{machine halts on n $\implies \Delta \vdash H$}
 
 To start out, we introduce a simple convention about negative numbers. Recall that in our definition of the Turing Machine, the tape extended infinitely in both directions, so we had both positive and negative tape locations.
 
 We will write 
 
-$tQ_ip$ = { p >= 0 : $tQ_ip$
-		  { p < 0 : \exists $z$ ($tQ_iz$ & z^(q) = 0)
+\[tQ_ip = \piecewise{ p >= 0 & tQ_ip \\ p < 0 & \exists z (tQ_iz \& z^(q) = 0)}\]
 
 similarly,
 $xS_jp$
-y != p
+$y != p$
 
 Equipped with this notation, we can now introduce a new sentence, called a /description of time s/ that states exactly what the machine looks like at time s. We do this in the obvious way, by specifying
 	- the state of the machine
@@ -23,35 +22,35 @@ Equipped with this notation, we can now introduce a new sentence, called a /desc
 
 In general, such a sentence has the form
 //insert formula 10.8 here
-where p_1, ... , p, ... p_r is an increasing sequence of integers (so p_1 may equal p)
+where $p_1, \dots , p, \dots, p_r$ is an increasing sequence of integers (so $p_1$ may equal $p$)
 
-Note that in the case of the starting conditions of the machine, sentence 10.4 (which we included in \delta) is exactly the description of time 0, under this new type of sentence formulation.
+Note that in the case of the starting conditions of the machine, sentence 10.4 (which we included in $\Delta$) is exactly the description of time 0, under this new type of sentence formulation.
 
 
 
 
 Now, to the proof.
 We have machine halts on n.
-This implies that at some time s, the machine is in state q_i scanning square number p on which the symbol s_j occurs, but there is no entry for q_i, s_j in the machine table.
+This implies that at some time s, the machine is in state $q_i$ scanning square number p on which the symbol $s_j$ occurs, but there is no entry for $q_i$, $s_j$ in the machine table.
 Consider the description of time s. We would write it as 
-sQ_ip & ... & sS_jp & ... & \forall y [(...)]
+\[sQ_ip \& \dots \& sS_jp \& \dots \& \forall y [(...)]\]
 this is a highly abbreviated form of the sentence, but notice the parts that we have included:
 	the conjunction of many terms with the terms
-	sQ_ip & sS_jp
+	$sQ_ip \& sS_jp$
 
-Let us suppose -- and this is a big supposition, one that will take a decent amount of proving below -- that \delta implies this description is true. Then we have 
-Q_ip & ... & sS_jp & ... & \forall y [(...)] = 1 			(*)
+Let us suppose -- and this is a big supposition, one that will take a decent amount of proving below -- that $\Delta$ implies this description is true. Then we have 
+\[Q_ip \& \dots \& sS_jp \& \dots \& \forall y [(...)] = 1 		\]	(*)
 and in particular
-sQ_ip & sS_jp = 1
+\[sQ_ip \& sS_jp = 1\]
 
 In other words, 
-\exists t \exists x (tQ_ix & tS_jx) = 1
-where Q_i and S_j are not in the machine table.
+\[\exists t \exists x (tQ_ix \& tS_jx) = 1\]
+where $Q_i$ and $S_j$ are not in the machine table.
 Notice: this last sentence is exactly one of the or clauses of H. If this last sentence is true, it implies H.
 
 In other words, we now have 
 halting description (*) => H
-All there is now left to do is to show that \delta => (*) if the machine halts.
+All there is now left to do is to show that $\Delta \implies$ (*) if the machine halts.
 We will prove this inductively, showing that at every step of the Turing machine's operation, the description of its state is implied by delta.
 
 
