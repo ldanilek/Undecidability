@@ -1,19 +1,24 @@
 \subsection{Symbols}
+\newcommand{\z}{\mathbf{o}}
+
+The Turing machine 
+
 \begin{itemize}
 \item $\Delta$ is a finite set of sentences that describe the operation of the Turing machine.
 \item $n$ is a number, the input to the Turing machine.
-\item $H$ is a sentence such that $\Delta\vdash H\iff$ the machine does eventually halt when given input $n$, when $H$ is interpreted in $\mathscr{I}$.
+\item $H$ is a sentence such that $\Delta\vdash H\iff$ the machine does eventually halt when given input $n$.
 \item $\mathscr{I}$ is an interpretation for $H$ and the sentences in $\Delta$. The variables range over the integers, and it uses the following definitions:
-\item $Q_i$ for $0 \le i \le r$ is a binary predicate function.\\
+\item $Q_i$ for $0 \le i \le \psi$ is a binary predicate function.\\
 $t Q_i x \iff $ at time $t$ the machine is in state $q_i$, scanning square number $x$.
 \item $S_j$ for $0\le j\le r$ is a binary predicate function.\\
 $t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning square number $x$.
 \item $<$ is the standard less-than binary predicate.
-\item $0$ is the standard zero function.
-\item $'$ is the standard successor function.
+\item $\z$ is the standard zero function.
+\item $'$ is the standard successor function (even when applied to negatives).
 \end{itemize}
 
-Thus, if we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because $\Delta\vdash H$ if and only if a certain sentence is valid, namely the condition whose antecedent is the conjunction of all sentences in $\Delta$ and whose consequent is $H$: $\Delta_1 \& \Delta_2 \& \cdots \rightarrow H$.
+If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because \comment{$\Delta\vdash H$ if and only if the sentence}
+\[\Delta_1 \land  \Delta_2 \land  \cdots \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
 
 \subsection{Construction}
 The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. 
@@ -24,29 +29,27 @@ If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
 
 Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
 
-\[\forall t\forall x\forall y \{[tQ_ix\& tS_jx] \rightarrow [t'Q_mx\& t'S_kx \& (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry))]\}\]
+\[\forall t\forall x\forall y \{[tQ_ix\land  tS_jx] \rightarrow [t'Q_mx\land  t'S_kx \land  (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry))]\}\]
 
 Rule: \igEdge{q_i}{S_j:R}{q_m}
 
-\[\forall t\forall x\forall y\{[tQ_tx\&tS_jx]\rightarrow [t'Q_mx' \& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
+\[\forall t\forall x\forall y\{[tQ_tx\land tS_jx]\rightarrow [t'Q_mx' \land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
 
 Rule: \igEdge{q_i}{S_j:L}{q_m}
 
-\[\forall t \forall x \forall y \{[tQ_ix' \& tS_jx']\rightarrow [t'Q_mx\& (tS_0y\rightarrow t'S_0y)\&\dots\&(tS_ry\rightarrow t'S_ry)]\}\]
+\[\forall t \forall x \forall y \{[tQ_ix' \land  tS_jx']\rightarrow [t'Q_mx\land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
 
 Starting condition:
 
-\newcommand{\z}{\mathbf{o}}
-
-\[\z Q_1 \z\ \&\ \z S_1\z'\ \&\ \z S_0\z '\ \&\dots\&\ \z S_1\z^{(n-1)}\ \&\ \forall y [(y\ne \z\ \&\ y\ne \z'\ \&\dots\&\ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
+\[\z Q_1 \z\ \land \ \z S_1\z'\ \land \ \z S_0\z '\ \land \dots\land \ \z S_1\z^{(n-1)}\ \land \ \forall y [(y\ne \z\ \land \ y\ne \z'\ \land \dots\land \ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
 
 Now provide basic sentences to deal with integers:
 This sentence says that each integer is the successor of exactly one integer:
-\[\forall z\exists x z = x'\ \& \ \forall z\forall x\forall y (z=x'\&z=y'\rightarrow x=y)\]
+\[\forall z\exists x z = x'\ \land  \ \forall z\forall x\forall y (z=x'\land z=y'\rightarrow x=y)\]
 
 This sentence says that if $p,q\in\N$ and $p\ne q$, then $\forall x x^{(p)}\ne x^{(q)}$ is implied by $\Delta$. All such sentences are consequences of the following:
-\[\forall x\forall y\forall z (x < y\ \&\ y < z\rightarrow x<z)\ \&\ \forall x\forall y(x'=y\rightarrow x<y)\ \&\ \forall x\forall y(x<y\rightarrow x\ne y)\]
+\[\forall x\forall y\forall z (x < y\ \land \ y < z\rightarrow x<z)\ \land \ \forall x\forall y(x'=y\rightarrow x<y)\ \land \ \forall x\forall y(x<y\rightarrow x\ne y)\]
 
 Define $H$ as the disjunction of all sentences
-\[\exists t\exists x (tQ_i x\ \&\ tS_jx)\]
+\[\exists t\exists x (tQ_i x\ \land \ tS_jx)\]
 such that there is no entry for $q_i$, $S_j$ in the table of our machine. If there is always an entry for every $q_i$, $S_j$, then the machine never halts and we take $H$ to be some sentence that is false in $\mathscr{I}$, like $\z\ne \z$.
