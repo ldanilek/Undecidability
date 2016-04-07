@@ -27,27 +27,34 @@ The squares of the tape are numbered by integers, and moments of time are intege
 If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
 
 Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
-
-\[\forall t\forall x\forall y \{[tQ_ix\land  tS_jx] \rightarrow [t'Q_mx\land  t'S_kx \land  (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry))]\}\]
-
+\begin{equation}\label{writeTapeEdge}
+\forall t\forall x\forall y \{[tQ_ix\land  tS_jx] \rightarrow [t'Q_mx\land  t'S_kx \land  (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry))]\}
+\end{equation}
 Rule: \igEdge{q_i}{S_j:R}{q_m}
-
-\[\forall t\forall x\forall y\{[tQ_ix\land tS_jx]\rightarrow [t'Q_mx' \land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
-
+\begin{equation}
+\forall t\forall x\forall y\{[tQ_ix\land tS_jx]\rightarrow [t'Q_mx' \land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}
+\end{equation}
 Rule: \igEdge{q_i}{S_j:L}{q_m}
-
-\[\forall t \forall x \forall y \{[tQ_ix' \land  tS_jx']\rightarrow [t'Q_mx\land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
+\begin{equation}
+\forall t \forall x \forall y \{[tQ_ix' \land  tS_jx']\rightarrow [t'Q_mx\land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}
+\end{equation}
 
 Starting condition:
-
-\[\z Q_1 \z\ \land \ \z S_1\z\ \land \ \z S_1\z '\ \land \dots\land \ \z S_1\z^{(n-1)}\ \land \ \forall y [(y\ne \z\ \land \ y\ne \z'\ \land \dots\land \ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
-
-Now provide basic sentences to deal with integers:
-This sentence says that each integer is the successor of exactly one integer:
-\[\forall z\exists x z = x'\ \land  \ \forall z\forall x\forall y (z=x'\land z=y'\rightarrow x=y)\]
-
-This sentence says that if $p,q\in\N$ and $p\ne q$, then $\forall x x^{(p)}\ne x^{(q)}$ is implied by $\Delta$. All such sentences are consequences of the following:
-\[\forall x\forall y\forall z (x < y\ \land \ y < z\rightarrow x<z)\ \land \ \forall x\forall y(x'=y\rightarrow x<y)\ \land \ \forall x\forall y(x<y\rightarrow x\ne y)\]
+\begin{equation}
+\label{descOfZero}
+\z Q_1 \z\ \land \ \z S_1\z\ \land \ \z S_1\z '\ \land \dots\land \ \z S_1\z^{(n-1)}\ \land \ \forall y [(y\ne \z\ \land \ y\ne \z'\ \land \dots\land \ y\ne \z^{(n-1)}) \rightarrow \z S_0y]
+\end{equation}
+Now we provide basic sentences to deal with integers:
+\begin{itemize}
+\item This sentence says that each integer is the successor of exactly one integer:
+\begin{equation}\label{successorOfOneOther}
+\forall z\exists x z = x'\ \land  \ \forall z\forall x\forall y (z=x'\land z=y'\rightarrow x=y)
+\end{equation}
+\item This sentence says that if $p,q\in\N$ and $p\ne q$, then $\forall x x^{(p)}\ne x^{(q)}$ is implied by $\Delta$. All such sentences are consequences of the following:
+\begin{equation}\label{additionWorks}
+\forall x\forall y\forall z (x < y\ \land \ y < z\rightarrow x<z)\ \land \ \forall x\forall y(x'=y\rightarrow x<y)\ \land \ \forall x\forall y(x<y\rightarrow x\ne y)
+\end{equation}
+\end{itemize}
 
 Define $H$ as the disjunction of all sentences
 \[\exists t\exists x (tQ_i x\ \land \ tS_jx)\]

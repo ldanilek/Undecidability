@@ -1,19 +1,18 @@
-Now, we only need to show that for all non-negative $s$ that if the machine has not halted before time $s$, then $\Delta$ implies some description of time $s$. We will prove this by induction. Specifically, what we will prove is for all times $t$, then if $M$ does not halt before time $t$, then $\Delta \vdash M_t$ where $M_t$ is a description of the machine at time $t$ (equation~\ref{descAtTime}).
+Now, we only need to show that for all non-negative $t$ that if the machine has not halted before time $t$, then $\Delta$ implies some description of time $t$. We will prove this by induction. Specifically, what we will prove is for all times $t$, then if $M$ does not halt before time $t$, then $\Delta \vdash M_t$ where $M_t$ is a description of the machine at time $t$ (equation~\ref{descAtTime}). This induction will show $\Delta$ implies the machine is running exactly when it actually is.
 
-\noindent\textbf{Base case:} $s=0$. $\Delta$ contains, and thus implies, $M_0$, which is a description of time $0$.
+\noindent\textbf{Base case:} $t=0$. $\Delta$ contains, and thus implies, $M_0$ (equation~\ref{descOfZero}), which is a description of time $0$.
 
-\noindent\textbf{Inductive step:} Suppose $\Delta$ implies some description of $\I$ for all times before $s$ and that the machine has not halted before time $s+1$. Now, we must show that $\Delta$ implies some description of time $s+1$.
+\noindent\textbf{Inductive step:} Now, we suppose our induction hypothesis, namely that $\Delta\vdash M_t$ for all $t \leq s$ for some fixed $s$. We additionally assume that the machine has not yet halted at time $s$. Now, we must show that $\Delta\vdash M_{s+1}$ implies some description of time $s+1$.
 
-We already know that $\I$ is a model of $\Delta$, so $(10.8)$ is true in $\I$. Therefore at time $s$, the machine is in state $q_i$, scanning symbol $S_j$ from square $p$. Since the machine does not halt at $s$, at least one of the following edges must exist:
+We already know that $\I$ is a model of $\Delta$, so (\ref{descAtTime}) is true in $\I$. Therefore at time $s$, the machine is in state $q_i$, scanning symbol $S_j$ from square $p$. Since the machine does not halt at $s$, at least one of the following edges must exist:
 \begin{enumerate}
 \item \igEdge{i}{S_j:S_k}{m}
 \item \igEdge{i}{S_j:R}{m}
 \item \igEdge{i}{S_j:L}{m}
 \end{enumerate}
-
-Here, we will show only the first case, and leave the latter two as exercises. They are equally wordy and very similar. So, in the first case, one of the sentences in $\Delta$ must be (by construction):
+Here, we will prove only the first case, and leave the latter two as exercises. They are equally wordy and very similar. So, in the first case, one of the sentences in $\Delta$ must be (by construction, equation~\ref{writeTapeEdge}):
 $$\forall t\forall x\forall y: \left\{ \left[t Q_i x \land t S_j x\right] \to \underbrace{\left[t' Q_m x \land t' S_k x \land (y \neq x \to ((t S_0 y \to t' S_0 y) \land \cdots \land (t S_r y \to t' S_r y)))\right]}_{\text{this part implies a description of time s+1}} \right\}$$
-Together with $(10.5)$ (each integer is successor of exactly one other), $(10.6)$ (numbers are distinct, successors behave like addition), and $(10.8)$ (form of description of time $s$), this implies:
+Together with (\ref{successorOfOneOther}) (each integer is successor of exactly one other), (\ref{additionWorks}) (numbers are distinct, successors behave like addition), and (\ref{descAtTime}) (form of description of time $s$), this implies:
 $$\forall y: \left\{ \left[s Q_i p \land s S_j p\right] \to \left[s' Q_m p \land s' S_k p \land (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right] \right\}$$
 $$s' Q_m p \land s' S_k p \land \forall y: \left\{ (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right\}$$
 From this, we know that if the machine has visited positions $p_1,\ldots,p,\ldots,p_v$ then each of those positions has some symbol on it that remains unchanged (except for position $p$) and all outside positions still contain the default symbol $S_0$.
