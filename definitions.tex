@@ -6,17 +6,20 @@ The Turing machine
 \item $n$ is a number, the input to the Turing machine.
 \item $H$ is a sentence such that $\Delta\vdash H\iff$ the machine does eventually halt when given input $n$.
 \item $\mathscr{I}$ is an interpretation for $H$ and the sentences in $\Delta$. The variables range over the integers, and it uses the following definitions:
-\item $Q_i$ for $0 \le i \le \psi$ is a binary predicate function.\\
+\item $Q_i$ for $0 \le i \le k$ is a binary predicate.\\
 $t Q_i x \iff $ at time $t$ the machine is in state $q_i$, scanning square number $x$.
-\item $S_j$ for $0\le j\le r$ is a binary predicate function.\\
+\item $S_j$ for $0\le j\le r$ is a binary predicate.\\
 $t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning square number $x$.
 \item $<$ is the standard less-than binary predicate.
-\item $\z$ is the standard zero function.
+\item $\z$ is the standard zero constant.
 \item $'$ is the standard successor function (even when applied to negatives).
 \end{itemize}
 
-If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because \comment{$\Delta\vdash H$ if and only if the sentence}
-\[\Delta_1 \land  \Delta_2 \land  \cdots \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
+If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$)
+\[\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\]
+If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have
+\[(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
+So validity is tied up with the Halting problem.
 
 \subsection{Construction}
 The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. 
@@ -29,7 +32,7 @@ Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
 
 Rule: \igEdge{q_i}{S_j:R}{q_m}
 
-\[\forall t\forall x\forall y\{[tQ_tx\land tS_jx]\rightarrow [t'Q_mx' \land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
+\[\forall t\forall x\forall y\{[tQ_ix\land tS_jx]\rightarrow [t'Q_mx' \land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}\]
 
 Rule: \igEdge{q_i}{S_j:L}{q_m}
 
@@ -37,7 +40,7 @@ Rule: \igEdge{q_i}{S_j:L}{q_m}
 
 Starting condition:
 
-\[\z Q_1 \z\ \land \ \z S_1\z'\ \land \ \z S_0\z '\ \land \dots\land \ \z S_1\z^{(n-1)}\ \land \ \forall y [(y\ne \z\ \land \ y\ne \z'\ \land \dots\land \ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
+\[\z Q_1 \z\ \land \ \z S_1\z\ \land \ \z S_1\z '\ \land \dots\land \ \z S_1\z^{(n-1)}\ \land \ \forall y [(y\ne \z\ \land \ y\ne \z'\ \land \dots\land \ y\ne \z^{(n-1)}) \rightarrow \z S_0y]\]
 
 Now provide basic sentences to deal with integers:
 This sentence says that each integer is the successor of exactly one integer:
@@ -48,4 +51,4 @@ This sentence says that if $p,q\in\N$ and $p\ne q$, then $\forall x x^{(p)}\ne x
 
 Define $H$ as the disjunction of all sentences
 \[\exists t\exists x (tQ_i x\ \land \ tS_jx)\]
-such that there is no entry for $q_i$, $S_j$ in the table of our machine. If there is always an entry for every $q_i$, $S_j$, then the machine never halts and we take $H$ to be some sentence that is false in $\mathscr{I}$, like $\z\ne \z$.
+\textbf{such that there is no entry for $q_i$, $S_j$ in the table of our machine}. If there is always an entry for every $q_i$, $S_j$, then the machine never halts and we take $H$ to be some sentence that is false in $\mathscr{I}$, like $\z\ne \z$.
