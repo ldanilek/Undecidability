@@ -15,7 +15,11 @@ $t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning s
 \item $'$ is the standard successor function (even when applied to negatives).
 \end{itemize}
 
-If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$) $$\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H$$ If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have $$(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n$$ So validity is tied up with the Halting problem.
+If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$)
+\[\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\]
+If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have
+\[(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
+So validity is tied up with the Halting problem.
 
 \subsection{Construction}
 The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.

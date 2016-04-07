@@ -11,10 +11,10 @@ We already know that $\I$ is a model of $\Delta$, so (\ref{descAtTime}) is true 
 \item \igEdge{i}{S_j:L}{m}
 \end{enumerate}
 Here, we will prove only the first case, and leave the latter two as exercises. They are equally wordy and very similar. So, in the first case, one of the sentences in $\Delta$ must be (by construction, equation~\ref{writeTapeEdge}):
-$$\forall t\forall x\forall y: \left\{ \left[t Q_i x \land t S_j x\right] \to \underbrace{\left[t' Q_m x \land t' S_k x \land (y \neq x \to ((t S_0 y \to t' S_0 y) \land \cdots \land (t S_r y \to t' S_r y)))\right]}_{\text{this part implies a description of time s+1}} \right\}$$
+\[\forall t\forall x\forall y: \left\{ \left[t Q_i x \land t S_j x\right] \to \underbrace{\left[t' Q_m x \land t' S_k x \land (y \neq x \to ((t S_0 y \to t' S_0 y) \land \cdots \land (t S_r y \to t' S_r y)))\right]}_{\text{this part implies a description of time s+1}} \right\}\]
 Together with (\ref{successorOfOneOther}) (each integer is successor of exactly one other), (\ref{additionWorks}) (numbers are distinct, successors behave like addition), and (\ref{descAtTime}) (form of description of time $s$), this implies:
-$$\forall y: \left\{ \left[s Q_i p \land s S_j p\right] \to \left[s' Q_m p \land s' S_k p \land (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right] \right\}$$
-$$s' Q_m p \land s' S_k p \land \forall y: \left\{ (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right\}$$
+\[\forall y: \left\{ \left[s Q_i p \land s S_j p\right] \to \left[s' Q_m p \land s' S_k p \land (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right] \right\}\]
+\[s' Q_m p \land s' S_k p \land \forall y: \left\{ (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right\}\]
 From this, we know that if the machine has visited positions $p_1,\ldots,p,\ldots,p_v$ then each of those positions has some symbol on it that remains unchanged (except for position $p$) and all outside positions still contain the default symbol $S_0$.
 \begin{equation}
 \begin{split}
