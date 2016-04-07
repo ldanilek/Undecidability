@@ -15,18 +15,12 @@ $t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning s
 \item $'$ is the standard successor function (even when applied to negatives).
 \end{itemize}
 
-If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$)
-\[\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\]
-If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have
-\[(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
-So validity is tied up with the Halting problem.
+If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$) $$\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H$$ If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have $$(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n$$ So validity is tied up with the Halting problem.
 
 \subsection{Construction}
-The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. 
+The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
 
-If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
-
-Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
+\noindent Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
 \begin{equation}\label{writeTapeEdge}
 \forall t\forall x\forall y \{[tQ_ix\land  tS_jx] \rightarrow [t'Q_mx\land  t'S_kx \land  (y\ne x \rightarrow (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry))]\}
 \end{equation}
@@ -56,6 +50,4 @@ Now we provide basic sentences to deal with integers:
 \end{equation}
 \end{itemize}
 
-Define $H$ as the disjunction of all sentences
-\[\exists t\exists x (tQ_i x\ \land \ tS_jx)\]
-\textbf{such that there is no entry for $q_i$, $S_j$ in the table of our machine}. If there is always an entry for every $q_i$, $S_j$, then the machine never halts and we take $H$ to be some sentence that is false in $\mathscr{I}$, like $\z\ne \z$.
+Define $H$ as the disjunction of all sentences $\exists t\exists x (tQ_i x\ \land \ tS_jx)$ \textbf{such that there is no entry for $q_i$, $S_j$ in the table of our machine}. If there is always an entry for every $q_i$, $S_j$, then the machine never halts and we take $H$ to be some sentence that is false in $\mathscr{I}$, like $\z\ne \z$.
