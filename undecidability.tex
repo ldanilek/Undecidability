@@ -35,6 +35,10 @@
 \title{First Order Logic is Undecidable}
 \author{Lee Danilek \and Amelia Holcomb \and Priyanka Krishnamurthi \and Matthew Johnson \and Andrew Malta \and Alex Reinking}
 
+\newcommand{\igEdge}[3]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#1}};}\ensuremath{\xrightarrow[]{#2}}\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#3}};}}
+\newcommand{\z}{\mathbf{o}}
+
+\numberwithin{equation}{section}
 \begin{document}
 \maketitle
 
@@ -46,5 +50,4 @@
 
 \section{Verification}
 \input{verification}
-
 \end{document}

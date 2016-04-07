@@ -1,6 +1,6 @@
-Now, we only need to show that for all non-negative $s$ that if the machine has not halted before time $s$, then $\Delta$ implies some description of time $s$. We will prove this by induction.
+Now, we only need to show that for all non-negative $s$ that if the machine has not halted before time $s$, then $\Delta$ implies some description of time $s$. We will prove this by induction. Specifically, what we will prove is for all times $t$, then if $M$ does not halt before time $t$, then $\Delta \vdash M_t$ where $M_t$ is a description of the machine at time $t$ (equation~\ref{descAtTime}).
 
-\noindent\textbf{Base case:} $s=0$. $\Delta$ contains, and thus implies, $(10.4)$, which is a description of time $0$.
+\noindent\textbf{Base case:} $s=0$. $\Delta$ contains, and thus implies, $M_0$, which is a description of time $0$.
 
 \noindent\textbf{Inductive step:} Suppose $\Delta$ implies some description of $\I$ for all times before $s$ and that the machine has not halted before time $s+1$. Now, we must show that $\Delta$ implies some description of time $s+1$.
 
@@ -12,7 +12,15 @@ We already know that $\I$ is a model of $\Delta$, so $(10.8)$ is true in $\I$. T
 \end{enumerate}
 
 Here, we will show only the first case, and leave the latter two as exercises. They are equally wordy and very similar. So, in the first case, one of the sentences in $\Delta$ must be (by construction):
-$$\forall t\forall x\forall y: \left\{ \left[t Q_i x \land t S_j x\right] \to \underbrace{\left[t Q_m x \land t S_k x \land (y \neq x \to ((t S_0 y \to t' S_0 y) \land \cdots \land (t S_r y \to t' S_r y)))\right]}_{\text{this part implies a description of time s+1}} \right\}$$
+$$\forall t\forall x\forall y: \left\{ \left[t Q_i x \land t S_j x\right] \to \underbrace{\left[t' Q_m x \land t' S_k x \land (y \neq x \to ((t S_0 y \to t' S_0 y) \land \cdots \land (t S_r y \to t' S_r y)))\right]}_{\text{this part implies a description of time s+1}} \right\}$$
 Together with $(10.5)$ (each integer is successor of exactly one other), $(10.6)$ (numbers are distinct, successors behave like addition), and $(10.8)$ (form of description of time $s$), this implies:
-$$\z^{(s+1)} Q_m \z^{(p)} \land \left( \z^{(s+1)} Q_{j_1} \z^{(p_1)} \land \cdots \land \z^{(s+1)} Q_{j_v} \z^{(p_v)}\right) \land \left(\forall y \left[ (y \neq \z^{(p_1)} \land \cdots \land y \neq \z^{(p_v)}) \to \z^{(s+1)} S_0 y \right]\right)$$
+$$\forall y: \left\{ \left[s Q_i p \land s S_j p\right] \to \left[s' Q_m p \land s' S_k p \land (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right] \right\}$$
+$$s' Q_m p \land s' S_k p \land \forall y: \left\{ (y \neq p \to ((s S_0 y \to s' S_0 y) \land \cdots \land (s S_r y \to s' S_r y)))\right\}$$
+From this, we know that if the machine has visited positions $p_1,\ldots,p,\ldots,p_v$ then each of those positions has some symbol on it that remains unchanged (except for position $p$) and all outside positions still contain the default symbol $S_0$.
+\begin{equation}
+\begin{split}
+\z^{(s+1)} Q_m \z^{(p)} \land \left( \z^{(s+1)} S_{j_1} \z^{(p_1)} \land \cdots \land \z^{(s+1)} S_k \z^{(p)} \land \cdots \land \z^{(s+1)} S_{j_v} \z^{(p_v)}\right) \\
+\land \left(\forall y \left[ (y \neq \z^{(p_1)} \land \cdots \land y \neq \z^{(p_v)}) \to \z^{(s+1)} S_0 y \right]\right)
+\end{split}
+\end{equation}
 In all three cases, $\Delta$ implies a description of time $s+1$ and this completes the proof of the undecidability of first-order logic.

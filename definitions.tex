@@ -1,6 +1,4 @@
 \subsection{Symbols}
-\newcommand{\z}{\mathbf{o}}
-
 The Turing machine 
 
 \begin{itemize}
@@ -24,8 +22,6 @@ If we could solve the decision problem for validity of sentences we could determ
 The squares of the tape are numbered by integers, and moments of time are integers. Each moment in time is a single step in the Turing machine. The machine begins at time $t=0$ in square $x=0$ and stops when the machine halts. 
 
 If $t<0$ or $t>$ the halting time, $tQ_ix \mapsto 0$ and $tS_jx\mapsto 0$.
-
-\newcommand{\igEdge}[3]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#1}};}\ensuremath{\xrightarrow[]{#2}}\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {\ensuremath{#3}};}}
 
 Rule: \igEdge{q_i}{S_j:S_k}{q_m}.
 
