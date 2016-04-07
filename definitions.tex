@@ -6,6 +6,8 @@ The Turing machine
 \item $n$ is a number, the input to the Turing machine.
 \item $H$ is a sentence such that $\Delta\vdash H\iff$ the machine does eventually halt when given input $n$.
 \item $\mathscr{I}$ is an interpretation for $H$ and the sentences in $\Delta$. The variables range over the integers, and it uses the following definitions:
+\begin{itemize}
+\renewcommand{\labelitemii}{\textopenbullet}
 \item $Q_i$ for $0 \le i \le k$ is a binary predicate.\\
 $t Q_i x \iff $ at time $t$ the machine is in state $q_i$, scanning square number $x$.
 \item $S_j$ for $0\le j\le r$ is a binary predicate.\\
@@ -14,8 +16,9 @@ $t S_j x \iff $ at time $t$ the machine is scanning the symbol $S_j$, scanning s
 \item $\z$ is the standard zero constant.
 \item $'$ is the standard successor function (even when applied to negatives).
 \end{itemize}
+\end{itemize}
 
-If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta m\in \Delta$)
+If we could solve the decision problem for validity of sentences we could determine whether the machine eventually halts, because (given the finite sequence of sentences $\delta_1,\dots,\delta_m \in \Delta$)
 \[\Delta\vdash H\iff (\delta_1\land \delta_2\land \cdots \delta_m)\vdash H \iff \vdash (\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\]
 If we could prove that $\Delta\vdash H \iff $ the Turing machine halts on input $n$, we would have
 \[(\delta_1 \land  \delta_2 \land  \cdots\delta_m) \rightarrow H\text{ is valid }\iff \Delta\vdash H \iff \text{ the Turing machine halts on input }n\]
@@ -36,7 +39,6 @@ Rule: \igEdge{q_i}{S_j:L}{q_m}
 \begin{equation}
 \forall t \forall x \forall y \{[tQ_ix' \land  tS_jx']\rightarrow [t'Q_mx\land  (tS_0y\rightarrow t'S_0y)\land \dots\land (tS_ry\rightarrow t'S_ry)]\}
 \end{equation}
-
 Starting condition:
 \begin{equation}
 \label{descOfZero}

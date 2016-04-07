@@ -5,32 +5,29 @@ Since $H$ is true if and only if the machine halts on $n$, $\Delta \vdash H \imp
 
 \subsection{machine halts on n $\implies \Delta \vdash H$}
 
-To start out, we introduce a simple convention about negative numbers. Recall that in our definition of the Turing Machine, the tape extended infinitely in both directions, so we had both positive and negative tape locations.
-
-We will write
-\[tQ_ip = \piecewise{ \z^{(t)}Q_i\z^{(p)} & \text{if }p \ge 0 \\ 
-\exists z (\z^{(t)}Q_iz \land z^{(q)} = \z) & \text{if } p < 0}\]
+To start out, we introduce a simple convention about negative numbers. Recall that in our definition of the Turing Machine, the tape extended infinitely in both directions, so we had both positive and negative tape locations. We will write:
+\[tQ_ip = \piecewise{
+    \z^{(t)}Q_i\z^{(p)} & \text{if }p \ge 0 \\ 
+    \exists z (\z^{(t)}Q_iz \land z^{(q)} = \z) & \text{if } p < 0
+}\]
 with similar formulas for $xS_jp$ and $y \ne p$.
 
-Equipped with this notation, we can now introduce a new sentence, called a \textit{description of time $s$} that states exactly what the machine looks like at time s. We do this in the obvious way, by specifying
-
+Equipped with this notation, we can now introduce a new sentence, called a \textit{description of time $s$} that states exactly what the machine looks like at time s. We do this in the obvious way, by specifying:
 \begin{itemize}
 \item the state of the machine
 \item the symbols on each square of tape
 \item the square the machine is currently scanning
 \end{itemize}
-
 In general, such a sentence has the form
-\comment{ % using the verbose 0^(p) notation
-\begin{eqnarray*}
-\z^{(s)}Q_i\z^{(p)} \land \z^{(s)} S_{j_1} \z^{(p_1)} \land \dots\land \z^{(s)} S_j \z^{(p)} \land \dots \land \z^{(s)} S_{j_v}\z^{(p_r)} \land \\
-\forall y[(y\ne \z^{(p_1)}\land\dots\land y\ne \z^{(p)} \land \dots \land y\ne \z^{(p_r)} ) \rightarrow \z^{(s)} S_0y]
-\end{eqnarray*}}
-\begin{eqnarray*}\label{descAtTime}
-sQ_ip \land s S_{j_1} p_1 \land \dots\land s S_j p \land \dots \land s S_{j_v}p_r \land \\
+\begin{equation}\label{descAtTime}
+sQ_ip \land s S_{j_1} p_1 \land \dots\land s S_j p \land \dots \land s S_{j_v}p_r \land 
 \forall y[(y\ne p_1\land\dots\land y\ne p \land \dots \land y\ne p_r ) \rightarrow s S_0y]
-\end{eqnarray*}
-where $p_1, \dots , p, \dots, p_r$ is an increasing sequence of integers (and $p$ may be $p_1$ or $p_r$)
+\end{equation}
+where $p_1, \dots , p, \dots, p_r$ is an increasing sequence of integers (and $p$ may be $p_1$ or $p_r$). This is equivalent to the more verbose successor notation:
+\begin{eqnarray}
+\z^{(s)}Q_i\z^{(p)} \land \z^{(s)} S_{j_1} \z^{(p_1)} \land \dots\land \z^{(s)} S_j \z^{(p)} \land \dots \land \z^{(s)} S_{j_v}\z^{(p_r)} \land \\
+\forall y[(y\ne \z^{(p_1)}\land\dots\land y\ne \z^{(p)} \land \dots \land y\ne \z^{(p_r)} ) \rightarrow \z^{(s)} S_0y] \nonumber
+\end{eqnarray}
 
 Note that in the case of the starting conditions of the machine, sentence ~\ref{descOfZero} (which we included in $\Delta$) is exactly the description of time 0, under this new type of sentence formulation.
 
@@ -45,7 +42,5 @@ In other words,
 where $Q_i$ and $S_j$ are not in the machine table. Notice: this last sentence is exactly one of the or clauses of $H$. If this last sentence is true, it implies $H$.
 
 In other words, we now have halting description $(\star)\implies H$. All there is now left to do is to show that $\Delta \implies (\star)$ if the machine halts. We will prove this inductively, showing that at every step of the Turing machine's operation, the description of its state is implied by $\Delta$.
-
-
 \subsubsection{Induction}
 \input{induction}
